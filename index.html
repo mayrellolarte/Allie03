@@ -113,11 +113,53 @@
 			background-attachment: scroll;
 		}
 	}
+	/* Collage image styles */
+	.collage-img {
+		width: 95px;
+		height: 95px;
+		object-fit: cover;
+		border-radius: 10px;
+		box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+		cursor: pointer;
+		transition: transform 0.2s;
+	}
+	.collage-img:hover {
+		transform: scale(1.05);
+		z-index: 2;
+	}
+	/* Modal styles */
+	.img-modal {
+		display: none;
+		position: fixed;
+		z-index: 9999;
+		left: 0;
+		top: 0;
+		width: 100%;
+		height: 100%;
+		background-color: rgba(0,0,0,0.7);
+		justify-content: center;
+		align-items: center;
+	}
+	.img-modal.open {
+		display: flex;
+	}
+	.img-modal-content {
+		max-width: 90vw;
+		max-height: 90vh;
+		border-radius: 18px;
+		box-shadow: 0 8px 32px rgba(0,0,0,0.25);
+		background: #fff;
+		animation: popIn 0.22s cubic-bezier(.4,0,.2,1);
+	}
+	@keyframes popIn {
+		from { transform: scale(0.7); opacity: 0; }
+		to { transform: scale(1); opacity: 1; }
+	}
 	</style>
 </head>
 <body>
 	<!-- Background music -->
-	<audio id="bgMusic" src="ASSETS/YOU.mp3" autoplay loop hidden></audio>
+	<audio id="bgMusic" src="ASSETS/YOU.mp3" loop hidden></audio>
 	<div class="center-container" id="firstPage">
 		<button class="center-btn" id="mainBtn">My Allie ♡</button>
 	</div>
@@ -133,79 +175,38 @@
 		</div>
 	</div>
 	<div class="center-content hidden" id="thirdPage">
-	<div class="transparent-container">
-		<h2 style="text-align:center;">Photo Collage</h2>
-		<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px;justify-items:center;">
-			<img src="ASSETS/1.jpg" class="collage-img" alt="Photo 1">
-			<img src="ASSETS/2.jpg" class="collage-img" alt="Photo 2">
-			<img src="ASSETS/3.jpg" class="collage-img" alt="Photo 3">
-			<img src="ASSETS/4.jpg" class="collage-img" alt="Photo 4">
-			<img src="ASSETS/5.jpg" class="collage-img" alt="Photo 5">
-			<img src="ASSETS/6.jpg" class="collage-img" alt="Photo 6">
-			<img src="ASSETS/7.jpg" class="collage-img" alt="Photo 7">
-			<img src="ASSETS/8.jpg" class="collage-img" alt="Photo 8">
-			   <img src="ASSETS/9.jpg" class="collage-img" alt="Photo 9">
-			  </div>
-			  <div style="margin-top:2em; text-align:center; color:#d72660; font-size:1.1em;">
-    <p style="margin-bottom:0.7em;">
-        just like the song says,<br>
-        You are the one who makes me happy<br>
-        When everything else turned to grey<br>
-        Yours is the voice that wakes me mornings<br>
-        And sends me out into the day.
-    </p>
-    <p style="font-weight:bold; font-size:1.2em; margin-top:1em;">
-        i love you so much my baby!
-    </p>
-</div>
-			  <style>
-			  .collage-img {
-				  width: 95px;
-				  height: 95px;
-				  object-fit: cover;
-				  border-radius: 10px;
-				  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-				  cursor: pointer;
-				  transition: transform 0.2s;
-			  }
-			  .collage-img:hover {
-				  transform: scale(1.0);
-				  z-index: 2;
-			  }
-			  /* Modal styles */
-			  #imgModal {
-				  display: none;
-				  position: fixed;
-				  z-index: 9999;
-				  left: 0; top: 0; width: 5vw; height: 5vh;
-				  background: rgba(0,0,0,0.7);
-				  transition: background 0.2s;
-				  display: flex;
-				  justify-content: center;
-				  align-items: center;
-			  }
-			  #imgModal:not(.open) { display: none; }
-			  #imgModal.open { display: flex; }
-			  #imgModal img {
-				  max-width: 90vw;
-				  max-height: 90vh;
-				  border-radius: 18px;
-				  box-shadow: 0 8px 32px rgba(0,0,0,0.25);
-				  background: #fff;
-				  animation: popIn 0.22s cubic-bezier(.4,0,.2,1);
-				  display: block;
-				  margin: auto;
-			  }
-			  @keyframes popIn {
-				  from { transform: scale(0.7); opacity: 0; }
-				  to { transform: scale(1); opacity: 1; }
-			  }
-			  </style>
-			  <!-- Modal for enlarged image -->
-			  <div id="imgModal"><img id="imgModalImg" src="" alt="Enlarged"></div>
+		<div class="transparent-container">
+			<h2 style="text-align:center;">Photo Collage</h2>
+			<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px;justify-items:center;">
+				<img src="ASSETS/1.jpg" class="collage-img" alt="Photo 1">
+				<img src="ASSETS/2.jpg" class="collage-img" alt="Photo 2">
+				<img src="ASSETS/3.jpg" class="collage-img" alt="Photo 3">
+				<img src="ASSETS/4.jpg" class="collage-img" alt="Photo 4">
+				<img src="ASSETS/5.jpg" class="collage-img" alt="Photo 5">
+				<img src="ASSETS/6.jpg" class="collage-img" alt="Photo 6">
+				<img src="ASSETS/7.jpg" class="collage-img" alt="Photo 7">
+				<img src="ASSETS/8.jpg" class="collage-img" alt="Photo 8">
+				<img src="ASSETS/9.jpg" class="collage-img" alt="Photo 9">
+			</div>
+			<div style="margin-top:2em; text-align:center; color:#d72660; font-size:1.1em;">
+				<p style="margin-bottom:0.7em;">
+					just like the song says,<br>
+					You are the one who makes me happy<br>
+					When everything else turned to grey<br>
+					Yours is the voice that wakes me mornings<br>
+					And sends me out into the day.
+				</p>
+				<p style="font-weight:bold; font-size:1.2em; margin-top:1em;">
+					i love you so much my baby!❤️
+				</p>
+			</div>
 		</div>
 	</div>
-</div>
+	
+	<!-- Modal for enlarged image -->
+	<div id="imgModal" class="img-modal">
+		<img class="img-modal-content" id="imgModalImg" src="" alt="Enlarged photo">
+	</div>
 
 	<script>
 	// Try to resume music if browser blocks autoplay (especially on mobile)
@@ -221,177 +222,179 @@
 			document.addEventListener('click', tryPlay);
 			document.addEventListener('touchstart', tryPlay);
 		}
-	});
-	// Collage modal logic
-	document.addEventListener('DOMContentLoaded', function() {
+		
+		// Collage modal logic
 		const modal = document.getElementById('imgModal');
 		const modalImg = document.getElementById('imgModalImg');
+		
 		function openModal(src) {
 			modalImg.src = src;
 			modal.classList.add('open');
 		}
+		
 		function closeModal() {
 			modal.classList.remove('open');
-			setTimeout(() => { modalImg.src = ''; }, 200);
 		}
+		
 		document.querySelectorAll('.collage-img').forEach(img => {
-			img.addEventListener('click', function(e) {
+			img.addEventListener('click', function() {
 				openModal(this.src);
 			});
 		});
+		
 		modal.addEventListener('click', function(e) {
-			// Only close if background or image is clicked
-			closeModal();
+			if (e.target === modal) {
+				closeModal();
+			}
 		});
 	});
-		const mainBtn = document.getElementById('mainBtn');
-		const firstPage = document.getElementById('firstPage');
-		const secondPage = document.getElementById('secondPage');
-		let bgFadeDiv;
-		let typewriterActive = false;
-		let typewriterTimeouts = [];
-		let typewriterFinished = false;
-		mainBtn.onclick = function() {
-                // Hide first, show second
-                firstPage.classList.add('hidden');
-                secondPage.classList.remove('hidden');
-                // Add fade-in GIF background
-                if (!bgFadeDiv) {
-                    bgFadeDiv = document.createElement('div');
-                    bgFadeDiv.className = 'bg-fade';
-                    document.body.appendChild(bgFadeDiv);
-                    setTimeout(() => {
-                        document.body.style.backgroundImage = "url('ASSETS/BG GIF.gif')";
-                        bgFadeDiv.remove();
-                    }, 1500);
-                }
-                // Start typewriter effect
-                typewriterActive = true;
-                typewriterFinished = false;
-                typeWriterAll();
-            };
 
-            // Double click to skip typewriter and show all instantly
-            document.addEventListener('dblclick', function() {
-                if (!typewriterActive || typewriterFinished) return;
-                // Cancel all pending timeouts
-                typewriterTimeouts.forEach(clearTimeout);
-                typewriterTimeouts = [];
-                // Instantly show all text/buttons
-                for (const d of typewriterData) {
-                    const el = document.getElementById(d.id);
-                    if (el) {
-                        if (d.text.startsWith('<button')) {
-                            el.innerHTML = d.text;
-                        } else {
-                            el.innerHTML = d.text;
-                        }
-                    }
-                }
-                typewriterActive = false;
-                typewriterFinished = true;
-            });
+	const mainBtn = document.getElementById('mainBtn');
+	const firstPage = document.getElementById('firstPage');
+	const secondPage = document.getElementById('secondPage');
+	let bgFadeDiv;
+	let typewriterActive = false;
+	let typewriterTimeouts = [];
+	let typewriterFinished = false;
+	
+	mainBtn.onclick = function() {
+		// Hide first, show second
+		firstPage.classList.add('hidden');
+		secondPage.classList.remove('hidden');
+		// Add fade-in GIF background
+		if (!bgFadeDiv) {
+			bgFadeDiv = document.createElement('div');
+			bgFadeDiv.className = 'bg-fade';
+			document.body.appendChild(bgFadeDiv);
+			setTimeout(() => {
+				document.body.style.backgroundImage = "url('ASSETS/BG GIF.gif')";
+				bgFadeDiv.remove();
+			}, 1500);
+		}
+		// Start typewriter effect
+		typewriterActive = true;
+		typewriterFinished = false;
+		typeWriterAll();
+	};
 
-            // Typewriter effect for multiple elements
-            const typewriterData = [
-                {
-                    id: 'typewriter-h2',
-                    text: 'Happy 3rd Monthsary, my love!'
-                },
-                {
-                    id: 'typewriter-p1',
-                    text: 'I can’t believe it’s already been three months since we started this journey together. Every day with you feels so special, and I’m truly thankful for all the love, care, and happiness you’ve given me. These three months may seem short, but to me, they mean so much because they’ve been filled with memories with you.'
-                },
-                {
-                    id: 'typewriter-p2',
-                    text: 'I’ve realized that every fight we have only makes our relationship stronger. It’s during those times that I get to know you more deeply and understand you better. Even when things get tough, we always find our way back to each other, and that makes me love you even more.'
-                },
-                {
-                    id: 'typewriter-p3',
-                    text: 'I also promise to be more clear and transparent with my feelings, and I promise to follow you always. Mwa!'
-                },
-                {
-                    id: 'typewriter-p4',
-                    text: 'Thank you for being by my side and for making my days brighter. I’m so excited for all the months and years ahead of us!'
-                },
-                {
-                    id: 'typewriter-p5',
-                    text: 'I love you so much, today and always. ❤️'
-                },
-                {
-                    id: 'typewriter-btn-container',
-                    text: '<button class="center-btn" id="extraBtn">open me baby!</button>'
-			}
-		];
-
-		function typeWriterAll() {
-			let i = 0;
-			function next() {
-				if (!typewriterActive) return;
-				if (i < typewriterData.length) {
-					const el = document.getElementById(typewriterData[i].id);
-					if (el) {
-						el.classList.remove('visible');
+	// Double click to skip typewriter and show all instantly
+	document.addEventListener('dblclick', function() {
+		if (!typewriterActive || typewriterFinished) return;
+		// Cancel all pending timeouts
+		typewriterTimeouts.forEach(clearTimeout);
+		typewriterTimeouts = [];
+		// Instantly show all text/buttons
+		for (const d of typewriterData) {
+			const el = document.getElementById(d.id);
+			if (el) {
+				if (d.text.startsWith('<button')) {
+					el.innerHTML = d.text;
+					// Add event listener for the button
+					const btn = document.getElementById('extraBtn');
+					if (btn) {
+						btn.onclick = showThirdPage;
 					}
-					typeWriter(typewriterData[i].id, typewriterData[i].text, 0, () => {
-						const el2 = document.getElementById(typewriterData[i].id);
-						if (el2) {
-							el2.classList.add('visible');
-						}
-						i++;
-						next();
-					});
 				} else {
-					typewriterActive = false;
-					typewriterFinished = true;
+					el.innerHTML = d.text;
 				}
-			}
-			next();
-		}
-
-		function typeWriter(elementId, text, idx, callback) {
-			const el = document.getElementById(elementId);
-			if (!el) return;
-			// If the text is HTML (for the button), just insert it
-			if (text.startsWith('<button')) {
-				el.innerHTML = text;
 				el.classList.add('visible');
-				// Add event listener for the third page transition
-				if (elementId === 'typewriter-btn-container') {
-					setTimeout(() => {
-						const btn = document.getElementById('extraBtn');
-						if (btn) {
-							btn.onclick = showThirdPage;
-						}
-					}, 10);
-				}
-				const t = setTimeout(callback, 500);
-				typewriterTimeouts.push(t);
-				return;
 			}
-		// Always attach the event listener in case of skip
-		function showThirdPage() {
-			document.getElementById('secondPage').classList.add('hidden');
-			document.getElementById('thirdPage').classList.remove('hidden');
 		}
-		document.addEventListener('click', function() {
+		typewriterActive = false;
+		typewriterFinished = true;
+	});
+
+	// Typewriter effect for multiple elements
+	const typewriterData = [
+		{
+			id: 'typewriter-h2',
+			text: 'Happy 3rd Monthsary, my love!'
+		},
+		{
+			id: 'typewriter-p1',
+			text: 'I can’t believe it’s already been three months since we started this journey together. Every day with you feels so special, and I’m truly thankful for all the love, care, and happiness you’ve given me. These three months may seem short, but to me, they mean so much because they’ve been filled with memories with you.'
+		},
+		{
+			id: 'typewriter-p2',
+			text: 'I’ve realized that every fight we have only makes our relationship stronger. It’s during those times that I get to know you more deeply and understand you better. Even when things get tough, we always find our way back to each other, and that makes me love you even more.'
+		},
+		{
+			id: 'typewriter-p3',
+			text: 'I also promise to be more clear and transparent with my feelings, and I promise to follow you always. Mwa!'
+		},
+		{
+			id: 'typewriter-p4',
+			text: 'Thank you for being by my side and for making my days brighter. I’m so excited for all the months and years ahead of us!'
+		},
+		{
+			id: 'typewriter-p5',
+			text: 'I love you so much, today and always. ❤️'
+		},
+		{
+			id: 'typewriter-btn-container',
+			text: '<button class="center-btn" id="extraBtn">open me baby!</button>'
+		}
+	];
+
+	function typeWriterAll() {
+		let i = 0;
+		function next() {
+			if (!typewriterActive) return;
+			if (i < typewriterData.length) {
+				const el = document.getElementById(typewriterData[i].id);
+				if (el) {
+					el.classList.remove('visible');
+				}
+				typeWriter(typewriterData[i].id, typewriterData[i].text, 0, () => {
+					const el2 = document.getElementById(typewriterData[i].id);
+					if (el2) {
+						el2.classList.add('visible');
+					}
+					i++;
+					next();
+				});
+			} else {
+				typewriterActive = false;
+				typewriterFinished = true;
+			}
+		}
+		next();
+	}
+
+	function typeWriter(elementId, text, idx, callback) {
+		const el = document.getElementById(elementId);
+		if (!el) return;
+		// If the text is HTML (for the button), just insert it
+		if (text.startsWith('<button')) {
+			el.innerHTML = text;
+			el.classList.add('visible');
+			// Add event listener for the third page transition
 			const btn = document.getElementById('extraBtn');
-			if (btn && !btn.onclick) {
+			if (btn) {
 				btn.onclick = showThirdPage;
 			}
-		});
-			if (idx <= text.length && typewriterActive) {
-				el.innerHTML = text.substring(0, idx) + '<span style="border-right:2px solid #d72660"></span>';
-				el.classList.remove('visible');
-				const t = setTimeout(() => typeWriter(elementId, text, idx + 1, callback), 45 + Math.random() * 40);
-				typewriterTimeouts.push(t);
-			} else {
-				el.innerHTML = text;
-				el.classList.add('visible');
-				const t = setTimeout(callback, 700);
-				typewriterTimeouts.push(t);
-			}
+			const t = setTimeout(callback, 500);
+			typewriterTimeouts.push(t);
+			return;
 		}
+		
+		if (idx <= text.length && typewriterActive) {
+			el.innerHTML = text.substring(0, idx) + '<span style="border-right:2px solid #d72660"></span>';
+			el.classList.remove('visible');
+			const t = setTimeout(() => typeWriter(elementId, text, idx + 1, callback), 45 + Math.random() * 40);
+			typewriterTimeouts.push(t);
+		} else {
+			el.innerHTML = text;
+			el.classList.add('visible');
+			const t = setTimeout(callback, 700);
+			typewriterTimeouts.push(t);
+		}
+	}
+	
+	function showThirdPage() {
+		document.getElementById('secondPage').classList.add('hidden');
+		document.getElementById('thirdPage').classList.remove('hidden');
+	}
 	</script>
 </body>
 </html>
